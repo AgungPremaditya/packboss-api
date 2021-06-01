@@ -19,6 +19,10 @@ Route::group(['prefix'=> 'auth', 'namespace' => 'Auth'], function () {
     Route::post('register', 'RegisterController@register')->name('auth.register');
 });
 
+Route::get('test', function () {
+    return("test");
+});
+
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
