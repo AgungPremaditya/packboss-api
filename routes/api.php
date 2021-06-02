@@ -19,8 +19,8 @@ Route::group(['prefix'=> 'auth', 'namespace' => 'Auth'], function () {
     Route::post('register', 'RegisterController@register')->name('auth.register');
 });
 
-Route::get('test', function () {
-    return("test");
+Route::group(['prefix' => 'package', 'namespace' => 'Package'], function(){
+    Route::resource('destination', 'DestinationController')->except('index', 'create', 'edit');
 });
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
