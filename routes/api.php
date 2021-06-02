@@ -14,12 +14,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+//AUTH ROUTES
 Route::group(['prefix' => 'auth'], function() {
     Route::post('login', 'AuthController@Login')->name('auth.login');
     Route::get('unauthorized', 'AuthController@Unauthorized')->name('auth.unauthorized');
 });
 
 Route::group(['middleware' => 'auth:sanctum'], function(){
+    Route::group(['prefix' => 'package', 'namespace' => 'Package'], function(){
+        Route::resource('destination', 'DestinationController')->except('index', 'create', 'edit');
+    });
+    
     Route::get('test', function () {
         return(['messages' => 'anata ga suki dayo']);
     });
