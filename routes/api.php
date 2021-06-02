@@ -14,6 +14,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::group(['prefix' => 'auth'], function() {
+    Route::post('login', 'AuthController@Login')->name('auth.login');
+    Route::get('unauthorized', 'AuthController@Unauthorized')->name('auth.unauthorized');
+});
+
+Route::group(['middleware' => 'auth:sanctum'], function(){
+    Route::get('test', function () {
+        return(['messages' => 'anata ga suki dayo']);
+    });
 });
