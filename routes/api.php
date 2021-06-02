@@ -15,15 +15,17 @@ use Illuminate\Support\Facades\Route;
 */
 
 //AUTH ROUTES
-Route::group(['prefix'=> 'auth', 'namespace' => 'Auth'], function () {
-    Route::post('register', 'RegisterController@register')->name('auth.register');
+Route::group(['prefix' => 'auth'], function() {
+    Route::post('login', 'AuthController@Login')->name('auth.login');
+    Route::get('unauthorized', 'AuthController@Unauthorized')->name('auth.unauthorized');
 });
 
-Route::group(['prefix' => 'package', 'namespace' => 'Package'], function(){
-    Route::resource('destination', 'DestinationController')->except('index', 'create', 'edit');
+Route::group(['middleware' => 'auth:sanctum'], function(){
+    Route::group(['prefix' => 'package', 'namespace' => 'Package'], function(){
+        Route::resource('destination', 'DestinationController')->except('index', 'create', 'edit');
+    });
+    
+    Route::get('test', function () {
+        return(['messages' => 'anata ga suki dayo']);
+    });
 });
-
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
