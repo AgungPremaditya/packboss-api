@@ -10,25 +10,6 @@ use Validator;
 
 class DestinationController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -84,20 +65,25 @@ class DestinationController extends Controller
      */
     public function show($id)
     {
-        //
-    }
+        $data = Destination::find($id);
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
+        if (empty($data)) {
+            $response = [
+                'statusCode' => 404,
+                'messages' => 'not found',
+                'content' => null
+            ];   
+            return response()->json($response, 404);
+        }
 
+        $response = [
+            'statusCode' => 200,
+            'messages' => 'success',
+            'content' => $data
+        ];
+        return response()->json($response, 200);
+    }
+    
     /**
      * Update the specified resource in storage.
      *
