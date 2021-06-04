@@ -45,7 +45,7 @@ class DestinationController extends Controller
             'detail_address' => $request->detail_address
         ];
 
-        $result = Destination::create($data);        
+        $result = Destination::create($data);
         
         $response = [
             'statusCode' => 200,
