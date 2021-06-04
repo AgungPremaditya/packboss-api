@@ -53,6 +53,51 @@ class AuthController extends Controller
         
     }
 
+    public function Register(Request $request)
+    {
+        //Make Validator
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'email' => 'email|required',
+            'phone' => 'required|numeric|min:11',
+            'password' => 'required',
+            'c_password' => 'required|same:password',
+        ]);
+
+        //If Validator fails return error
+        if ($validator->fails()) {
+            $response = [
+                'code' => 422,
+                'messages' => $validator->errors(),
+                'content' => null
+            ];
+            return response()->json($response, 422);
+        }
+
+        //Add user data
+        $data = [
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'phone' => $request->phone,
+            'status' => 'active'
+        ];
+
+        $user = User::create($data);
+        
+        $tokenResult = $user->createToken('token-auth')->plainTextToken;
+        $response = [
+            'statusCode' => 200,
+            'massages' => 'Success',
+            'content' => [
+                'user' => $user,
+                'accessToken' => $tokenResult,
+                'tokenType' => 'Bearer' 
+            ]
+        ];
+        return response()->json($response, 200);
+    }
+
     public function Unauthorized()
     {
         $response = [
