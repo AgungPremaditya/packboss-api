@@ -11,7 +11,9 @@ class Destination extends Model
 {
     use HasFactory;
     
+    protected $table = 'destinations';
     protected $fillable = [
+        'id',
         'country_name',
         'province_name',
         'region_name',
@@ -22,8 +24,20 @@ class Destination extends Model
     public static function boot()
     {
         parent::boot();
-        self::creating(function($user){
-            $user->{$user->getKeyName()} = (string) Str::uuid();
+        self::creating(function($destination){
+            $destination->{$destination->getKeyName()} = (string) Str::uuid();
         });
     }
+
+    public function getIncrementing()
+    {
+        return false;
+    }
+
+
+    public function getKeyType()
+    {
+        return 'string';
+    }
+
 }
