@@ -150,6 +150,16 @@ class DestinationController extends Controller
     {
         $data = Destination::find($id);
 
+        if (empty($result)) {
+            $response = [
+                'statusCode' => 404,
+                'messages' => 'not found',
+                'content' => null
+            ];
+
+            return response()->json($response, 404);    
+        }
+        
         $data->delete();
 
         $response = [
