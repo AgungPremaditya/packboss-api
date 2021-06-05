@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 //AUTH ROUTES
 Route::group(['prefix' => 'auth'], function() {
     Route::post('login', 'AuthController@Login')->name('auth.login');
+    Route::post('register', 'AuthController@Register')->name('auth.register');
     Route::get('unauthorized', 'AuthController@Unauthorized')->name('auth.unauthorized');
 });
 
