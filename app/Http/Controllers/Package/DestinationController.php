@@ -148,6 +148,16 @@ class DestinationController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $data = Destination::find($id);
+
+        $data->delete();
+
+        $response = [
+            'statusCode' => 200,
+            'messages' => 'succes',
+            'content' => null
+        ];
+
+        return response()->json($response, 200);
     }
 }
