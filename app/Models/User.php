@@ -10,6 +10,7 @@ use Laravel\Sanctum\HasApiTokens;
 
 use Illuminate\Support\Str;
 
+
 class User extends Authenticatable
 {
     use HasFactory, Notifiable, HasApiTokens;
@@ -64,4 +65,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    
+    /**
+     * Get all of the origins for the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function origins()
+    {
+        return $this->hasMany(Origin::class);
+    }
 }

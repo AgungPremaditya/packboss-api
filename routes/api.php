@@ -24,7 +24,9 @@ Route::group(['prefix' => 'auth'], function() {
 Route::group(['middleware' => 'auth:sanctum'], function(){
     Route::group(['prefix' => 'package', 'namespace' => 'Package'], function(){
         Route::resource('destination', 'DestinationController')->except('index', 'create', 'edit');
+        Route::resource('origin', 'OriginController')->except('index', 'create', 'edit');
     });
+    
     
     Route::get('test', function () {
         return(['messages' => 'anata ga suki dayo']);
