@@ -65,18 +65,24 @@ class OriginController extends Controller
      */
     public function show($id)
     {
-        //
-    }
+        $data = Origin::where('id', $id)->with('users')->first();
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        if (empty($data)) {
+            $response = [
+                'statusCode' => 404,
+                'messages' => 'not found',
+                'content' => null
+            ];
+
+            return response()->json($response, 404);    
+        }
+
+        $response = [
+            'statusCode' => 200,
+            'messages' => 'success',
+            'content' => $data
+        ];
+        return response()->json($response, 200);
     }
 
     /**
