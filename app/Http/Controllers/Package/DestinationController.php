@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Package;
 
+use Illuminate\Support\Facades\Gate;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Destination;
@@ -19,6 +20,15 @@ class DestinationController extends Controller
      */
     public function store(Request $request)
     {
+        if (Gate::allows('isOperator')) {
+            $response = [
+                'statusCode' => 403,
+                'messages' => 'Sorry, this page is not accessible for you',
+                'content' => null
+            ];
+            return response()->json($response, 403);
+        }
+
         $validate = Validator::make($request->all(), [
             'country_name' => 'required|string',
             'province_name' => 'required|string',
@@ -65,6 +75,15 @@ class DestinationController extends Controller
      */
     public function show($id)
     {
+        if (Gate::allows('isOperator')) {
+            $response = [
+                'statusCode' => 403,
+                'messages' => 'Sorry, this page is not accessible for you',
+                'content' => null
+            ];
+            return response()->json($response, 403);
+        }
+
         $data = Destination::find($id);
 
         if (empty($data)) {
@@ -93,6 +112,15 @@ class DestinationController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if (Gate::allows('isOperator')) {
+            $response = [
+                'statusCode' => 403,
+                'messages' => 'Sorry, this page is not accessible for you',
+                'content' => null
+            ];
+            return response()->json($response, 403);
+        }
+
         $result = Destination::find($id);
 
         if (empty($result)) {
@@ -148,6 +176,15 @@ class DestinationController extends Controller
      */
     public function destroy($id)
     {
+        if (Gate::allows('isOperator')) {
+            $response = [
+                'statusCode' => 403,
+                'messages' => 'Sorry, this page is not accessible for you',
+                'content' => null
+            ];
+            return response()->json($response, 403);
+        }
+
         $data = Destination::find($id);
 
         if (empty($result)) {
