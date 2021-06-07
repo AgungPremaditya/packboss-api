@@ -36,7 +36,12 @@ class AuthController extends Controller
 
             $user = User::where('email', $request->email)->first();
             if (! Hash::check($request->password, $user->password)) {
-                throw new Exception('Error on Login');
+                $response = [
+                    'statusCode' => 401,
+                    'massages' => 'Password Mismatch',
+                    'content' => null
+                ];
+                return response()->json($response, 401);
             }
             
             $tokenResult = $user->createToken('token-auth')->plainTextToken;
