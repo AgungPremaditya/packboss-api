@@ -187,7 +187,7 @@ class DestinationController extends Controller
 
         $data = Destination::find($id);
 
-        if (empty($result)) {
+        if (empty($data)) {
             $response = [
                 'statusCode' => 404,
                 'messages' => 'not found',
