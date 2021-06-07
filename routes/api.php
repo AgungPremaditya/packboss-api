@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Gate;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,6 +30,10 @@ Route::group(['middleware' => 'auth:sanctum'], function(){
     
     
     Route::get('test', function () {
-        return(['messages' => 'anata ga suki dayo']);
+        if (Gate::allows('isAdmin')) {
+            return(['messages' => 'anata ga suki dayo']);
+        } else {
+            return('403');
+        }
     });
 });
