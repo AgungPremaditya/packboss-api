@@ -23,10 +23,26 @@ Route::group(['prefix' => 'auth'], function() {
 });
 
 Route::group(['middleware' => 'auth:sanctum'], function(){
+
+    //Packages Route
     Route::group(['prefix' => 'package', 'namespace' => 'Package'], function(){
+       
+        //Destination
         Route::resource('destination', 'DestinationController')->except('index', 'create', 'edit');
+        
+        //Origin
         Route::resource('origin', 'OriginController')->except('index', 'create', 'edit');
+       
+       //Category Packages
         Route::resource('category', 'CategoryController')->except('create', 'edit');
+
+        //Packages
+        Route::get('/', 'PackagesController@index')->name('packages.index'); // Index
+        Route::post('/', 'PackagesController@store')->name('packages.store'); // Store
+        Route::get('/{id}', 'PackagesController@show')->name('packages.show'); // Show
+        Route::put('/{id}', 'PackagesController@update')->name('packages.update'); // Update
+        Route::delete('/{id}', 'PackagesController@destroy')->name('packages.delete'); // Delete
+        
     });
     
     

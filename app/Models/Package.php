@@ -11,7 +11,7 @@ class Package extends Model
 {
     use HasFactory;
 
-    protected $table = 'package';
+    protected $table = 'packages';
     protected $fillable = [
         'id',
         'id_user',
