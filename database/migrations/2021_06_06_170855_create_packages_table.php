@@ -20,7 +20,7 @@ class CreatePackagesTable extends Migration
             $table->uuid('id_cateogry');
             $table->string('package_name');
             $table->string('recepient_name');
-            $table-> char('recepient_phone');
+            $table->char('recepient_phone');
             $table->float('weight');
             $table->string('dimension');
             $table->timestamps();
