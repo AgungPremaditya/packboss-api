@@ -38,9 +38,28 @@ class Package extends Model
         return false;
     }
 
-
     public function getKeyType()
     {
         return 'string';
+    }
+
+    /**
+     * Get the category that owns the Package
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function category()
+    {
+        return $this->belongsTo(Category::class, 'id_category');
+    }
+
+    /**
+     * Get the user that owns the Package
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'id_user');
     }
 }

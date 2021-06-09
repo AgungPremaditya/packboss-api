@@ -75,4 +75,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(Origin::class);
     }
+    
+    /**
+     * Get all of the packages for the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function packages()
+    {
+        return $this->hasMany(Package::class);
+    }
 }

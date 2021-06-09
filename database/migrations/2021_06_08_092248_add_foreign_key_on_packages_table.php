@@ -16,7 +16,8 @@ class AddForeignKeyOnPackagesTable extends Migration
         Schema::table('packages', function (Blueprint $table) {
             $table->foreign('id_user')->references('id')->on('users');
             $table->foreign('id_destination')->references('id')->on('destinations');
-            $table->foreign('id_cateogry')->references('id')->on('categories');
+            $table->foreign('id_origin')->references('id')->on('origins');
+            $table->foreign('id_category')->references('id')->on('categories');
         });
     }
 
