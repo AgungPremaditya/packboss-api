@@ -19,6 +19,7 @@ class CreateTransactionsTable extends Migration
             $table->foreign('id_package')->references('id')->on('packages');
             $table->uuid('id_user')->nullable();
             $table->foreign('id_user')->references('id')->on('users');
+            $table->string('receipt_number')->unique();
             $table->float('price_per_kg', 8, 2);
             $table->float('total_price', 8, 2);
             $table->enum('status', [

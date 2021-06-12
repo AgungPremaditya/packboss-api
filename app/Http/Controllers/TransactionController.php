@@ -12,7 +12,7 @@ use App\Models\Package;
 use App\Models\Origin;
 
 
-use Validator;
+use Validator, Str;
 
 class TransactionController extends Controller
 {
@@ -23,8 +23,18 @@ class TransactionController extends Controller
      */
     public function index()
     {
-        $data = Transaction::with('package')->get();
-        return $data;
+        $data = Transaction::with(['package' => function($query){
+            $query->with('user', 'destination', 'origin');
+        }])->get();
+
+
+        $response = [
+            'statusCode' => 200,
+            'messages' => 'Succes',
+            'content' => $data
+        ];
+
+        return response()->json($response, 200);
     }
 
     /**
@@ -59,7 +69,11 @@ class TransactionController extends Controller
         $price = (int)$distance * 50;
         $total_price = $price * $packages->weight;
 
+        //Generate Code
+        $code = $this->generateReceipt();
+
         $data = [
+            'receipt_number' => Str::upper($code),
             'id_package' => $packages->id,
             'price_per_kg' => $price,
             'total_price' => $total_price,
@@ -85,19 +99,35 @@ class TransactionController extends Controller
      */
     public function show($id)
     {
-        //
-    }
+        $data = Transaction::where('id', $id)
+        ->with(['package' => function($query){
+            $query->with('user', 'destination', 'origin', 'category');
+        }])
+        ->first();
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
+            $response = [
+                'statusCode' => 403,
+                'messages' => 'Sorry, this page is not accessible for you',
+                'content' => null
+            ];
+            return response()->json($response, 403);
+        if (empty($data)) {
+            $response = [
+                'statusCode' => 404,
+                'messages' => 'not found',
+                'content' => null
+            ];
+
+            return response()->json($response, 404);    
+        }
+
+        $response = [
+            'statusCode' => 200,
+            'messages' => 'Succes',
+            'content' => $data
+        ];
+
+        return response()->json($response, 200);
     }
 
     /**
@@ -108,9 +138,32 @@ class TransactionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        if (Gate::allows('isUser')) {
+            $response = [
+                'statusCode' => 403,
+                'messages' => 'Sorry, this page is not accessible for you',
+                'content' => null
+            ];
+            return response()->json($response, 403);
+        }
+
+        Transaction::find($id)->delete();
+        
+        $response = [
+            'statusCode' => 200,
+            'messages' => 'Success',
+            'content' => null
+        ];
+
+        return response()->json($response, 200);
     }
 
+    /**
+     * Count distance by zipcode using zipcodebase
+     *
+     * @param  array  $data
+     * @return \Illuminate\Http\Response
+     */
     public function countDistance($data)
     {
         $apiKey = 'c62c9b00-c4f7-11eb-99c0-2323b4dcf057';
@@ -124,5 +177,20 @@ class TransactionController extends Controller
         ])->json();
         
         return $response['results'][$data['comparedCode']];
+    }
+
+    public function generateReceipt()
+    {
+        $isNotUnique = true;
+
+        while ($isNotUnique) {
+            $code = Str::random(15);
+            $receipt    = Transaction::where('receipt_number', '=', $code)->first();
+            if (empty($receipt)) {
+                $isNotUnique = false;
+            }
+        }
+
+        return $code;
     }
 }

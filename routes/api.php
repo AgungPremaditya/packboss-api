@@ -46,12 +46,10 @@ Route::group(['middleware' => 'auth:sanctum'], function(){
     });
 
     Route::group(['prefix' => 'transaction'], function () {
-
         //Transaction
         Route::get('/', 'TransactionController@index')->name('packages.index'); // Index
         Route::post('/', 'TransactionController@store')->name('packages.store'); // Store
         Route::get('/{id}', 'TransactionController@show')->name('packages.show'); // Show
-        Route::put('/{id}', 'TransactionController@update')->name('packages.update'); // Update
         Route::delete('/{id}', 'TransactionController@destroy')->name('packages.delete'); // Delete
     });
     
