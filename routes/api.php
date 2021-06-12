@@ -44,6 +44,14 @@ Route::group(['middleware' => 'auth:sanctum'], function(){
         Route::delete('/{id}', 'PackagesController@destroy')->name('packages.delete'); // Delete
         
     });
+
+    Route::group(['prefix' => 'transaction'], function () {
+        //Transaction
+        Route::get('/', 'TransactionController@index')->name('packages.index'); // Index
+        Route::post('/', 'TransactionController@store')->name('packages.store'); // Store
+        Route::get('/{id}', 'TransactionController@show')->name('packages.show'); // Show
+        Route::delete('/{id}', 'TransactionController@destroy')->name('packages.delete'); // Delete
+    });
     
     
     Route::get('test', function () {

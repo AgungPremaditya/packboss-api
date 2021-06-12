@@ -7,23 +7,26 @@ use Illuminate\Database\Eloquent\Model;
 
 use Illuminate\Support\Str;
 
-class Category extends Model
+class Transaction extends Model
 {
     use HasFactory;
     
-    protected $table = 'categories';
+    protected $table = 'transactions';
     protected $fillable = [
         'id',
-        'category_name',
-        'is_fragile',
-        'is_hazardous'
+        'id_package',
+        'id_user',
+        'receipt_number',
+        'price_per_kg',
+        'total_price',
+        'status'
     ];
 
     public static function boot()
     {
         parent::boot();
-        self::creating(function($category){
-            $category->{$category->getKeyName()} = (string) Str::uuid();
+        self::creating(function($transaction){
+            $transaction->{$transaction->getKeyName()} = (string) Str::uuid();
         });
     }
 
@@ -38,14 +41,13 @@ class Category extends Model
         return 'string';
     }
 
-    
     /**
-     * Get the package associated with the Package
+     * Get the Package that owns the Transaction
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function package()
     {
-        return $this->hasOne(Package::class);
+        return $this->belongsTo(Package::class, 'id_package');
     }
 }

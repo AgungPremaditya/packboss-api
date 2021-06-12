@@ -40,4 +40,14 @@ class Destination extends Model
         return 'string';
     }
 
+    /**
+     * Get all of the package for the Destination
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function package(): HasMany
+    {
+        return $this->hasMany(Package::class);
+    }
+
 }

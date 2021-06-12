@@ -50,4 +50,14 @@ class Origin extends Model
     {
         return $this->belongsTo(User::class, 'id_user');
     }
+
+    /**
+     * Get all of the package for the Origin
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function package(): HasMany
+    {
+        return $this->hasMany(Package::class);
+    }
 }
