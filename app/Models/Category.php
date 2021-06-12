@@ -37,4 +37,15 @@ class Category extends Model
     {
         return 'string';
     }
+
+    
+    /**
+     * Get the package associated with the Package
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function package()
+    {
+        return $this->hasOne(Package::class);
+    }
 }

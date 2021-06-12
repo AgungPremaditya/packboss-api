@@ -16,8 +16,9 @@ class CreatePackagesTable extends Migration
         Schema::create('packages', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->uuid('id_user');
-            $table->uuid('id_destination');
-            $table->uuid('id_cateogry');
+            $table->uuid('id_destination')->nullable();
+            $table->uuid('id_origin')->nullable();
+            $table->uuid('id_category');
             $table->string('package_name');
             $table->string('recepient_name');
             $table->char('recepient_phone');
