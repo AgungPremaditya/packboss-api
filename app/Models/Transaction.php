@@ -16,7 +16,6 @@ class Transaction extends Model
         'id',
         'id_package',
         'id_user',
-        'transaction_date',
         'price_per_kg',
         'total_price',
         'status'
@@ -39,5 +38,15 @@ class Transaction extends Model
     public function getKeyType()
     {
         return 'string';
+    }
+
+    /**
+     * Get the Package that owns the Transaction
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function package()
+    {
+        return $this->belongsTo(Package::class, 'id_package');
     }
 }

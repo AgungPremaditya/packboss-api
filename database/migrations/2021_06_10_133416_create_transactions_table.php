@@ -17,7 +17,7 @@ class CreateTransactionsTable extends Migration
             $table->uuid('id')->primary();
             $table->uuid('id_package');
             $table->foreign('id_package')->references('id')->on('packages');
-            $table->uuid('id_user');
+            $table->uuid('id_user')->nullable();
             $table->foreign('id_user')->references('id')->on('users');
             $table->float('price_per_kg', 8, 2);
             $table->float('total_price', 8, 2);
