@@ -49,7 +49,7 @@
                 Package on Waiting
               </div>
               <div class="card-body bg-light">
-                <h5 class="card-title" style="font-weight: 600; font-size: 42px; margin: 20px;">80</h5>
+                <h5 class="card-title" style="font-weight: 600; font-size: 42px; margin: 20px;">{{$data['waiting-list']}}</h5>
                 <a href="#" class="btn btn-primary">Check Package</a>
               </div>
             </div>
@@ -61,7 +61,7 @@
                 Transports
               </div>
               <div class="card-body bg-light">
-                <h5 class="card-title" style="font-weight: 600; font-size: 42px; margin: 20px;">80</h5>
+                <h5 class="card-title" style="font-weight: 600; font-size: 42px; margin: 20px;">{{$data['transport']}}</h5>
                 <a href="#" class="btn bg-warning text-dark">Check Transport</a>
               </div>
             </div>
@@ -77,7 +77,7 @@
                 Package on Waiting
               </div>
               <div class="card-body bg-light">
-                <h5 class="card-title" style="font-weight: 600; font-size: 42px; margin: 20px;">80</h5>
+                <h5 class="card-title" style="font-weight: 600; font-size: 42px; margin: 20px;">{{$data['waiting-list']}}</h5>
                 <a href="#" class="btn btn-primary">Check Package</a>
               </div>
             </div>
@@ -89,7 +89,7 @@
                 Transports
               </div>
               <div class="card-body bg-light">
-                <h5 class="card-title" style="font-weight: 600; font-size: 42px; margin: 20px;">80</h5>
+                <h5 class="card-title" style="font-weight: 600; font-size: 42px; margin: 20px;">{{$data['transport']}}</h5>
                 <a href="#" class="btn bg-warning text-dark">Check Transport</a>
               </div>
             </div>
@@ -101,8 +101,8 @@
                 Operator
               </div>
               <div class="card-body bg-light">
-                <h5 class="card-title" style="font-weight: 600; font-size: 42px; margin: 20px;">80</h5>
-                <a href="#" class="btn bg-secondary text-white">Check Package</a>
+                <h5 class="card-title" style="font-weight: 600; font-size: 42px; margin: 20px;">{{$data['operator']}}</h5>
+                <a href="#" class="btn bg-secondary text-white">Check Operator</a>
               </div>
             </div>
           </div>
@@ -113,8 +113,8 @@
                 Transaction
               </div>
               <div class="card-body bg-light">
-                <h5 class="card-title" style="font-weight: 600; font-size: 42px; margin: 20px;">80</h5>
-                <a href="#" class="btn bg-info text-white">Check Transport</a>
+                <h5 class="card-title" style="font-weight: 600; font-size: 42px; margin: 20px;">{{$data['transaction']}}</h5>
+                <a href="#" class="btn bg-info text-white">Check Transaction</a>
               </div>
             </div>
           </div>
@@ -142,27 +142,23 @@
               </tr>
             </thead>
             <tbody>
+              @if ($data['pickup']->isEmpty())
               <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
+                <td colspan="5" style="font-weight: 600; text-align: center;">Data empty</td>
               </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Mark</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-              </tr>
-              <tr>
-                <th scope="row">3</th>
-                <td>Larry</td>
-                <td>Mark</td>
-                <td>the Bird</td>
-                <td>@twitter</td>
-              </tr>
+                  
+              @endif
+              @foreach ($data['pickup'] as $item)
+                  <tr>
+                    <td style="font-weight: 600;">{{$item->receipt_number}}</td>
+                    <td>{{$item->package->origin->detail_address}}</td>
+                    <td>Mark</td>
+                    <td style="font-weight: 600;">{{$item->status}}</td>
+                    <td>
+                      <a href="/{{$item->receipt_number}}" class="btn btn-primary">Detail</a>
+                    </td>
+                  </tr>
+              @endforeach
             </tbody>
           </table>
         </div>

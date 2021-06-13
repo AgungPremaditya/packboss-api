@@ -18,26 +18,54 @@ class HomeController extends Controller
         if (Auth::check() && Auth::user()->role != 'user') {
 
             //Get Data
-            $transactions = Transaction::all();
+            $waitingList = Transaction::where('status', 'waiting-for-pickup')->get();
             $transport = Transport::all();
 
-            //Count Transaction
-            $countedTransactions = count($transactions->toArray());
+            //Count Waiting List
+            $countedwaitingList = count($waitingList->toArray());
 
             //Count Transport
             $countedTransport = count($transport->toArray());
 
+            //Array Data
             $data =[ 
-                'transaction' => $countedTransactions,
+                'waiting-list' => $countedwaitingList,
                 'transport' => $countedTransport
             ];
 
-            dd($data);
-            if (Auth::user()->role == 'admin') {
-                
+            if (Auth::user()->role == 'operator') {
+                $pickup = Transaction::where('status', '!=','waiting-for-pickup')
+                ->with(['package' => function ($query){
+                    $query->select('id', 'id_origin')->with('origin');
+                }])
+                ->get();
+
             }
+
+            if (Auth::user()->role == 'admin') {
+              
+                //Get Data
+                $transactions = Transaction::all();
+                $operator = User::where('role', 'operator')->get();
+                $pickup = Transaction::with(['package' => function ($query){
+                    $query->select('id', 'id_origin')->with('origin');
+                }])
+                ->get();
+
+
+                //Count Transport
+                $countedOperator = count($operator->toArray());
+
+                //Count Transaction
+                $countedTransactions = count($transactions->toArray());
+
+                $data['operator'] = $countedOperator;
+                $data['transaction'] = $countedTransactions;
+            }   
+
+            $data['pickup'] = $pickup;
             
-            return view('home.index')->with($data);
+            return view('home.index')->with(['data' => $data]);
         }else{
             return redirect()->route('unauthorized');
         }
