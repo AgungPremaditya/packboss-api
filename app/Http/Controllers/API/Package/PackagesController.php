@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Package;
+namespace App\Http\Controllers\API\Package;
 
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Auth;

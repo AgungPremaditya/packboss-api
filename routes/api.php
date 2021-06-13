@@ -16,13 +16,13 @@ use Illuminate\Support\Facades\Gate;
 */
 
 //AUTH ROUTES
-Route::group(['prefix' => 'auth'], function() {
+Route::group(['prefix' => 'auth', 'namespace' => 'API'], function() {
     Route::post('login', 'AuthController@Login')->name('auth.login');
     Route::post('register', 'AuthController@Register')->name('auth.register');
     Route::get('unauthorized', 'AuthController@Unauthorized')->name('auth.unauthorized');
 });
 
-Route::group(['middleware' => 'auth:sanctum'], function(){
+Route::group(['middleware' => 'auth:sanctum', 'namespace' => 'API'], function(){
 
     //Packages Route
     Route::group(['prefix' => 'package', 'namespace' => 'Package'], function(){

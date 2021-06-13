@@ -2,28 +2,15 @@
 
 namespace App\Http\Controllers\Package;
 
-use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\API\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
-use App\Models\Category;
+use App\Models\Origin;
 
 use Validator;
 
-class CategoryController extends Controller
+class OriginController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        $data = Category::all();
-
-        return response()->json($data, 200);
-    }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -32,22 +19,15 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        if (Gate::allows('isUser')) {
-            $response = [
-                'statusCode' => 403,
-                'messages' => 'Sorry, this page is not accessible for you',
-                'content' => null
-            ];
-            return response()->json($response, 403);
-        }
-        
         $validate = Validator::make($request->all(), [
-            'category_name' => 'required|string',
-            'is_fragile' => 'required|integer',
-            'is_hazardous' => 'required|integer',
+            'country_name' => 'required|string',
+            'province_name' => 'required|string',
+            'region_name' => 'required|string',
+            'postal_code' => 'required|string',
+            'detail_address' => 'required'
         ]);
-            
-        if ($validate->fails()) {
+
+        if($validate->fails()){
             $response = [
                 'statusCode' => 422,
                 'messages' => $validate->errors(),
@@ -56,21 +36,24 @@ class CategoryController extends Controller
 
             return response()->json($response, 422);
         }
-
+        
         $data = [
-            'category_name' => $request->category_name,
-            'is_fragile' => $request->is_fragile,
-            'is_hazardous' => $request->is_hazardous
+            'id_user' => Auth::user()->id,
+            'country_name' => $request->country_name,
+            'province_name' => $request->province_name,
+            'region_name' => $request->region_name,
+            'postal_code' => $request->postal_code,
+            'detail_address' => $request->detail_address
         ];
 
-        $result = Category::create($data);
+        $result = Origin::create($data);
         
         $response = [
             'statusCode' => 200,
             'messages' => 'Success',
             'content' => $result
         ];
-        
+
         return response()->json($response, 200);
     }
 
@@ -82,24 +65,16 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        if (Gate::allows('isUser')) {
-            $response = [
-                'statusCode' => 403,
-                'messages' => 'Sorry, this page is not accessible for you',
-                'content' => null
-            ];
-            return response()->json($response, 403);
-        }
-
-        $data = Category::find($id);
+        $data = Origin::where('id', $id)->with('users')->first();
 
         if (empty($data)) {
             $response = [
                 'statusCode' => 404,
                 'messages' => 'not found',
                 'content' => null
-            ];   
-            return response()->json($response, 404);
+            ];
+
+            return response()->json($response, 404);    
         }
 
         $response = [
@@ -119,33 +94,27 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        if (Gate::allows('isUser')) {
-            $response = [
-                'statusCode' => 403,
-                'messages' => 'Sorry, this page is not accessible for you',
-                'content' => null
-            ];
-            return response()->json($response, 403);
-        }
-
-        $result = Category::find($id);
+        $result = Origin::where('id', $id)->with('users')->first();
 
         if (empty($result)) {
             $response = [
                 'statusCode' => 404,
                 'messages' => 'not found',
                 'content' => null
-            ];   
-            return response()->json($response, 404);
-        }
+            ];
 
+            return response()->json($response, 404);    
+        }
+        
         $validate = Validator::make($request->all(), [
-            'category_name' => 'required|string',
-            'is_fragile' => 'required|integer',
-            'is_hazardous' => 'required|integer',
+            'country_name' => 'required|string',
+            'province_name' => 'required|string',
+            'region_name' => 'required|string',
+            'postal_code' => 'required|string',
+            'detail_address' => 'required'
         ]);
 
-        if ($validate->fails()) {
+        if($validate->fails()){
             $response = [
                 'statusCode' => 422,
                 'messages' => $validate->errors(),
@@ -154,11 +123,13 @@ class CategoryController extends Controller
 
             return response()->json($response, 422);
         }
-
+        
         $data = [
-            'category_name' => $request->category_name,
-            'is_fragile' => $request->is_fragile,
-            'is_hazardous' => $request->is_hazardous
+            'country_name' => $request->country_name,
+            'province_name' => $request->province_name,
+            'region_name' => $request->region_name,
+            'postal_code' => $request->postal_code,
+            'detail_address' => $request->detail_address
         ];
         
         $result->update($data);
@@ -168,6 +139,7 @@ class CategoryController extends Controller
             'messages' => 'success',
             'content' => $result
         ];
+
         return response()->json($response);
     }
 
@@ -179,18 +151,9 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        if (Gate::allows('isUser')) {
-            $response = [
-                'statusCode' => 403,
-                'messages' => 'Sorry, this page is not accessible for you',
-                'content' => null
-            ];
-            return response()->json($response, 403);
-        }
-
-        $data = Category::find($id);
-
-        if (empty($data)) {
+        $result = Origin::where('id', $id)->with('users')->first();
+        
+        if (empty($result)) {
             $response = [
                 'statusCode' => 404,
                 'messages' => 'not found',
@@ -199,8 +162,8 @@ class CategoryController extends Controller
 
             return response()->json($response, 404);    
         }
-        
-        $data->delete();
+
+        $result->delete();
 
         $response = [
             'statusCode' => 200,
@@ -208,6 +171,6 @@ class CategoryController extends Controller
             'content' => null
         ];
 
-        return response()->json($response, 200);
+        return response()->json($response);
     }
 }
