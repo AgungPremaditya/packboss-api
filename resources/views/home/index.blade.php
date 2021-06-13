@@ -17,14 +17,14 @@
           <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Package</a>
+          <a class="nav-link" href="/package">Package</a>
         </li>
         @if (Auth::user()->role == 'admin')
         <li class="nav-item">
-          <a class="nav-link" href="#">Features</a>
+          <a class="nav-link" href="/operator">Operator</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Features</a>
+          <a class="nav-link" href="/transaction">Transaction</a>
         </li>
         @endif
       </ul>
@@ -97,24 +97,24 @@
 
           <div class="col-sm-3">
             <div class="card text-center">
-              <div class="card-header bg-primary text-white" style="font-weight: 600; font-size: 18px;">
-                Package on Waiting
+              <div class="card-header bg-secondary text-white" style="font-weight: 600; font-size: 18px;">
+                Operator
               </div>
               <div class="card-body bg-light">
                 <h5 class="card-title" style="font-weight: 600; font-size: 42px; margin: 20px;">80</h5>
-                <a href="#" class="btn btn-primary">Check Package</a>
+                <a href="#" class="btn bg-secondary text-white">Check Package</a>
               </div>
             </div>
           </div>
 
           <div class="col-sm-3">
             <div class="card text-center">
-              <div class="card-header bg-warning" style="font-weight: 600; font-size: 18px;">
-                Transports
+              <div class="card-header bg-info text-white" style="font-weight: 600; font-size: 18px;">
+                Transaction
               </div>
               <div class="card-body bg-light">
                 <h5 class="card-title" style="font-weight: 600; font-size: 42px; margin: 20px;">80</h5>
-                <a href="#" class="btn bg-warning text-dark">Check Transport</a>
+                <a href="#" class="btn bg-info text-white">Check Transport</a>
               </div>
             </div>
           </div>
@@ -129,41 +129,43 @@
     <div class="row">
       <div class="col-sm-12" style="padding: 18px;">
         <h2 style="padding-bottom: 10px;">History</h2>
-        
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th scope="col">Package Receipt</th>
-              <th scope="col">Pick-Up Location</th>
-              <th scope="col">Pick-Up Time</th>
-              <th scope="col">Status</th>
-              <th scope="col">Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th scope="row">1</th>
-              <td>Mark</td>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-            </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td>Jacob</td>
-              <td>Mark</td>
-              <td>Thornton</td>
-              <td>@fat</td>
-            </tr>
-            <tr>
-              <th scope="row">3</th>
-              <td>Larry</td>
-              <td>Mark</td>
-              <td>the Bird</td>
-              <td>@twitter</td>
-            </tr>
-          </tbody>
-        </table>
+
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">Package Receipt</th>
+                <th scope="col">Pick-Up Location</th>
+                <th scope="col">Pick-Up Time</th>
+                <th scope="col">Status</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@mdo</td>
+              </tr>
+              <tr>
+                <th scope="row">2</th>
+                <td>Jacob</td>
+                <td>Mark</td>
+                <td>Thornton</td>
+                <td>@fat</td>
+              </tr>
+              <tr>
+                <th scope="row">3</th>
+                <td>Larry</td>
+                <td>Mark</td>
+                <td>the Bird</td>
+                <td>@twitter</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
     
