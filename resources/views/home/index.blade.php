@@ -47,7 +47,7 @@
               </div>
               <div class="card-body bg-light">
                 <h5 class="card-title" style="font-weight: 600; font-size: 42px; margin: 20px;">{{$data['waiting-list']}}</h5>
-                <a href="/transaction" class="btn btn-primary">Check Package</a>
+                <a href="/on-waiting" class="btn btn-primary">Check Package</a>
               </div>
             </div>
           </div>
@@ -75,7 +75,7 @@
               </div>
               <div class="card-body bg-light">
                 <h5 class="card-title" style="font-weight: 600; font-size: 42px; margin: 20px;">{{$data['waiting-list']}}</h5>
-                <a href="/transaction" class="btn btn-primary">Check Package</a>
+                <a href="/on-waiting" class="btn btn-primary">Check Package</a>
               </div>
             </div>
           </div>
