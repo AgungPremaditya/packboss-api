@@ -30,5 +30,6 @@ Route::group(['namespace' => 'Web'], function () {
     Route::get('/on-waiting', 'PickupController@onWaiting')->name('pickup.onwaiting');
 
     //Tracking
-    Route::get('/tracking/create/{receipt_number}', 'TrackingController@create');
+    Route::get('/tracking/create/{receipt_number}', 'TrackingController@create')->name('tracking.create');
+    Route::post('/tracking/store', 'TrackingController@store')->name('tracking.store');
 });

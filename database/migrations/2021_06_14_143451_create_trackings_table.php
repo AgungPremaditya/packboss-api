@@ -17,7 +17,7 @@ class CreateTrackingsTable extends Migration
             $table->uuid('id')->primary();
             $table->uuid('id_transaction');
             $table->foreign('id_transaction')->references('id')->on('transactions');
-            $table->uuid('id_transport');
+            $table->uuid('id_transport')->nullable();
             $table->foreign('id_transport')->references('id')->on('transports');
             $table->uuid('id_user');
             $table->foreign('id_user')->references('id')->on('users');

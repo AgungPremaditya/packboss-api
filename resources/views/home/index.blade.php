@@ -142,7 +142,6 @@
               <tr>
                 <td colspan="5" style="font-weight: 600; text-align: center;">Data empty</td>
               </tr>
-                  
               @endif
               @foreach ($data['pickup'] as $item)
                   <tr>
