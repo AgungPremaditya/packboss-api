@@ -27,4 +27,7 @@ Route::group(['namespace' => 'Web'], function () {
     //Pickup
     Route::get('/pickup/{receipt_number}', 'PickupController@create')->name('pickup.create');
     Route::post('/pickup/store', 'PickupController@store')->name('pickup.store');
+
+    //Tracking
+    Route::get('/tracking/create/{receipt_number}', 'TrackingController@create');
 });

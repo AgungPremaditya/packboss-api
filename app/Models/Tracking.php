@@ -16,7 +16,8 @@ class Tracking extends Model
         'id',
         'id_transaction',
         'id_transport',
-        'id_user'
+        'id_user',
+        'tracking_status'
     ];
 
     public static function boot()

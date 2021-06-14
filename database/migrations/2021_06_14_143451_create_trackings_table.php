@@ -21,6 +21,15 @@ class CreateTrackingsTable extends Migration
             $table->foreign('id_transport')->references('id')->on('transports');
             $table->uuid('id_user');
             $table->foreign('id_user')->references('id')->on('users');
+            $table->enum('tracking_status', [
+                'waiting-for-pickup',
+                'on-pickup', 
+                'on-office-storage', 
+                'on-sorting', 
+                'on-delivery-courier', 
+                'delivered',
+                'canceled'
+            ]);
             $table->timestamps();
         });
     }
