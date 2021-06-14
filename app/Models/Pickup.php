@@ -7,25 +7,24 @@ use Illuminate\Database\Eloquent\Model;
 
 use Illuminate\Support\Str;
 
-class Transport extends Model
+class Pickup extends Model
 {
     use HasFactory;
 
-    protected $table = 'transports';
+    protected $table = 'pickups';
     protected $fillable = [
         'id',
-        'name',
-        'status',
-        'license_number',
-        'transport_type',
-        'transport_code'
+        'id_transaction',
+        'id_user',
+        'id_transport',
+        'pickedup_at',
     ];
-    
+
     public static function boot()
     {
         parent::boot();
-        self::creating(function($package){
-            $package->{$package->getKeyName()} = (string) Str::uuid();
+        self::creating(function($pickup){
+            $pickup->{$pickup->getKeyName()} = (string) Str::uuid();
         });
     }
 

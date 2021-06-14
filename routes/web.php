@@ -23,4 +23,8 @@ Route::group(['namespace' => 'Web'], function () {
     
     //Home
     Route::get('/home', 'HomeController@index')->name('home');
+
+    //Pickup
+    Route::get('/pickup/{receipt_number}', 'PickupController@create')->name('pickup.create');
+    Route::post('/pickup/store', 'PickupController@store')->name('pickup.store');
 });
