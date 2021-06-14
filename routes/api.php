@@ -47,10 +47,10 @@ Route::group(['middleware' => 'auth:sanctum', 'namespace' => 'API'], function(){
 
     Route::group(['prefix' => 'transaction'], function () {
         //Transaction
-        Route::get('/', 'TransactionController@index')->name('packages.index'); // Index
-        Route::post('/', 'TransactionController@store')->name('packages.store'); // Store
-        Route::get('/{id}', 'TransactionController@show')->name('packages.show'); // Show
-        Route::delete('/{id}', 'TransactionController@destroy')->name('packages.delete'); // Delete
+        Route::get('/', 'TransactionController@index')->name('transaction.index'); // Index
+        Route::post('/', 'TransactionController@store')->name('transaction.store'); // Store
+        Route::get('/{id}', 'TransactionController@show')->name('transaction.show'); // Show
+        Route::delete('/{id}', 'TransactionController@destroy')->name('transaction.delete'); // Delete
     });
     
     
