@@ -30,16 +30,34 @@ class AuthController extends Controller
         if ($validate->fails()) {
             return redirect()->back()->withErrors($validate);
         }
+        
+        $user = User::where('email', $request->email)->first();
 
-        Auth::attempt(['email' => $request->email, 'password' => $request->password]);
-        if (Auth::check()) {
-            if (Auth::user()->role == 'user') {
-                return redirect()->route('unauthorized');    
-            }
-            return redirect()->route('home');
+
+        if ($user->role == 'user') {
+            return view('auth.forbidden');
         } else {
-            Session::flash('error', 'Email atau Password Salah');
-            return redirect()->route('/');
+            Auth::attempt(['email' => $request->email, 'password' => $request->password]);
+
+            if (Auth::check()) {
+                if (Auth::user()->role == 'user') {
+                    return redirect()->route('unauthorized');    
+                }
+                return redirect()->route('home');
+            } else {
+                Session::flash('error', 'Email atau Password Salah');
+                return redirect()->route('/');
+            }
         }
+    }
+
+    public function unauthorized()
+    {
+        return view('auth.unauthorized');
+    }
+
+    public function forbidden()
+    {
+        return view('auth.forbidden');
     }
 }

@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\Package;
+namespace App\Http\Controllers\API\Package;
 
-use Illuminate\Support\Facades\API\Auth;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Origin;
@@ -19,6 +19,18 @@ class OriginController extends Controller
      */
     public function store(Request $request)
     {
+        $origins = Origin::where('id_user', Auth::user()->id)->first();
+
+        if (!empty($origins)) {
+            $response = [
+                'statusCode' => 422,
+                'messages' => 'user already has origins address',
+                'content' => null
+            ];
+
+            return response()->json($response, 422);
+        }
+
         $validate = Validator::make($request->all(), [
             'country_name' => 'required|string',
             'province_name' => 'required|string',

@@ -15,9 +15,16 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::group(['namespace' => 'Web'], function () {
+    //Auth
     Route::get('/', 'AuthController@loginIndex')->name('login'); 
     Route::post('/', 'AuthController@login');
-    Route::get('/home', function () {
-       return view('home.index');
-    })->name('home');
+    Route::get('/unauthorized', 'AuthController@unauthorized')->name('unauthorized');
+    Route::get('/forbidden', 'AuthController@forbidden')->name('forbidden');
+    
+    //Home
+    Route::get('/home', 'HomeController@index')->name('home');
+
+    //Pickup
+    Route::get('/pickup/{receipt_number}', 'PickupController@create')->name('pickup.create');
+    Route::post('/pickup/store', 'PickupController@store')->name('pickup.store');
 });
