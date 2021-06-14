@@ -135,7 +135,6 @@
                 <th scope="col">Pick-Up Location</th>
                 <th scope="col">Pick-Up Time</th>
                 <th scope="col">Status</th>
-                <th scope="col">Action</th>
               </tr>
             </thead>
             <tbody>
@@ -147,13 +146,10 @@
               @endif
               @foreach ($data['pickup'] as $item)
                   <tr>
-                    <td style="font-weight: 600;">{{$item->receipt_number}}</td>
-                    <td>{{$item->package->origin->detail_address}}</td>
-                    <td>Mark</td>
-                    <td style="font-weight: 600;">{{$item->status}}</td>
-                    <td>
-                      <a href="/{{$item->receipt_number}}" class="btn btn-primary">Detail</a>
-                    </td>
+                    <td style="font-weight: 600;">{{$item->transaction->receipt_number}}</td>
+                    <td>{{$item->transaction->package->origin->detail_address}}</td>
+                    <td>{{$item->pickedup_at}}</td>
+                    <td style="font-weight: 600;">{{$item->transaction->status}}</td>
                   </tr>
               @endforeach
             </tbody>

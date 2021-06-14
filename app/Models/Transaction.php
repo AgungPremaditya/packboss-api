@@ -49,4 +49,16 @@ class Transaction extends Model
     {
         return $this->belongsTo(Package::class, 'id_package');
     }
+
+    
+    /**
+     * Get all of the pickup for the Pickup
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function pickup()
+    {
+        return $this->hasOne(Pickup::class);
+    }
+
 }

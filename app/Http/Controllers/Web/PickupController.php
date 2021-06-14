@@ -16,6 +16,13 @@ use Validator;
 
 class PickupController extends Controller
 {
+    public function onWaiting()
+    {
+        $data = Transaction::where('status', 'waiting-for-pickup')->get();
+        
+        return view('transaction.index')->with(['data' => $data]);
+    }
+
     public function create($receipt_number)
     {
         $data = [];

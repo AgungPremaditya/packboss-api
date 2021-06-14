@@ -66,7 +66,7 @@
                     <td>Mark</td>
                     <td style="font-weight: 600;">{{$item->status}}</td>
                     <td>
-                      <a href="/{{$item->receipt_number}}" class="btn btn-primary">Detail</a>
+                      <a href="/pickup/{{$item->receipt_number}}" class="btn btn-primary">Detail</a>
                     </td>
                   </tr>
               @endforeach
