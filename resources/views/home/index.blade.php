@@ -17,14 +17,11 @@
           <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/package">Package</a>
+          <a class="nav-link" href="/transaction">Transaction</a>
         </li>
         @if (Auth::user()->role == 'admin')
         <li class="nav-item">
           <a class="nav-link" href="/operator">Operator</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/transaction">Transaction</a>
         </li>
         @endif
       </ul>
@@ -50,7 +47,7 @@
               </div>
               <div class="card-body bg-light">
                 <h5 class="card-title" style="font-weight: 600; font-size: 42px; margin: 20px;">{{$data['waiting-list']}}</h5>
-                <a href="#" class="btn btn-primary">Check Package</a>
+                <a href="/on-waiting" class="btn btn-primary">Check Package</a>
               </div>
             </div>
           </div>
@@ -78,7 +75,7 @@
               </div>
               <div class="card-body bg-light">
                 <h5 class="card-title" style="font-weight: 600; font-size: 42px; margin: 20px;">{{$data['waiting-list']}}</h5>
-                <a href="#" class="btn btn-primary">Check Package</a>
+                <a href="/on-waiting" class="btn btn-primary">Check Package</a>
               </div>
             </div>
           </div>
@@ -138,7 +135,6 @@
                 <th scope="col">Pick-Up Location</th>
                 <th scope="col">Pick-Up Time</th>
                 <th scope="col">Status</th>
-                <th scope="col">Action</th>
               </tr>
             </thead>
             <tbody>
@@ -150,13 +146,10 @@
               @endif
               @foreach ($data['pickup'] as $item)
                   <tr>
-                    <td style="font-weight: 600;">{{$item->receipt_number}}</td>
-                    <td>{{$item->package->origin->detail_address}}</td>
-                    <td>Mark</td>
-                    <td style="font-weight: 600;">{{$item->status}}</td>
-                    <td>
-                      <a href="/{{$item->receipt_number}}" class="btn btn-primary">Detail</a>
-                    </td>
+                    <td style="font-weight: 600;">{{$item->transaction->receipt_number}}</td>
+                    <td>{{$item->transaction->package->origin->detail_address}}</td>
+                    <td>{{$item->pickedup_at}}</td>
+                    <td style="font-weight: 600;">{{$item->transaction->status}}</td>
                   </tr>
               @endforeach
             </tbody>
