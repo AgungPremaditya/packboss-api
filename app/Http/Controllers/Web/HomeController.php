@@ -10,6 +10,7 @@ use App\Models\Package;
 use App\Models\Transport;
 use App\Models\Transaction;
 use App\Models\User;
+use App\Models\Pickup;
 
 class HomeController extends Controller
 {
@@ -34,9 +35,11 @@ class HomeController extends Controller
             ];
 
             if (Auth::user()->role == 'operator') {
-                $pickup = Transaction::where('status', '!=','waiting-for-pickup')
-                ->with(['package' => function ($query){
-                    $query->select('id', 'id_origin')->with('origin');
+                $pickup = Pickup::with(['transaction' => function ($query){
+                    $query->where('status', '!=','waiting-for-pickup')
+                    ->with(['package' => function ($query){
+                        $query->select('id', 'id_origin')->with('origin');
+                    }]);
                 }])
                 ->get();
 
@@ -47,8 +50,11 @@ class HomeController extends Controller
                 //Get Data
                 $transactions = Transaction::all();
                 $operator = User::where('role', 'operator')->get();
-                $pickup = Transaction::with(['package' => function ($query){
-                    $query->select('id', 'id_origin')->with('origin');
+                $pickup = Pickup::with(['transaction' => function ($query){
+                    $query->where('status', '!=','waiting-for-pickup')
+                    ->with(['package' => function ($query){
+                        $query->select('id', 'id_origin')->with('origin');
+                    }]);
                 }])
                 ->get();
 

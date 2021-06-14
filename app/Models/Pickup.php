@@ -38,4 +38,16 @@ class Pickup extends Model
     {
         return 'string';
     }
+
+    /**
+     * Get the Transaction that owns the Transaction
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function transaction()
+    {
+        return $this->belongsTo(Transaction::class, 'id_transaction');
+    }
+    
+    
 }
