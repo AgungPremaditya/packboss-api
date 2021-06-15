@@ -78,13 +78,13 @@ class PackagesController extends Controller
 
         return $result; 
 
-        $response = [
-            'statusCode' => 200,
-            'messages' => 'Success',
-            'content' => $result
-        ];
+        // $response = [
+        //     'statusCode' => 200,
+        //     'messages' => 'Success',
+        //     'content' => $result
+        // ];
 
-        return response()->json($response, 200);
+        // return response()->json($response, 200);
     }
 
     /**
