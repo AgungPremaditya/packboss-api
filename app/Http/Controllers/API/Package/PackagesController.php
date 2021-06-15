@@ -73,9 +73,11 @@ class PackagesController extends Controller
             'weight' => $request->weight,
             'dimension' => $request->dimension,
         ];
-
-        $result = Package::create($data);
         
+        $result = Package::create($data);
+
+        return $result; 
+
         $response = [
             'statusCode' => 200,
             'messages' => 'Success',
