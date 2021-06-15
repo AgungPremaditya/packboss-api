@@ -45,38 +45,39 @@ class PackagesController extends Controller
      */
     public function store(Request $request)
     {
-        $validate = Validator::make($request->all(), [
-            'category' => 'required',
-            'package_name' => 'required|string',
-            'recepient_name' => 'required|string', 
-            'recepient_phone' => 'required|numeric|min:11',
-            'weight' => 'required|numeric',
-            'dimension' => 'required'
-        ]); 
+        return "zonk";
+        // $validate = Validator::make($request->all(), [
+        //     'category' => 'required',
+        //     'package_name' => 'required|string',
+        //     'recepient_name' => 'required|string', 
+        //     'recepient_phone' => 'required|numeric|min:11',
+        //     'weight' => 'required|numeric',
+        //     'dimension' => 'required'
+        // ]); 
 
-        if ($validate->fails()) {
-            $response = [
-                'statusCode' => 422,
-                'messages' => $validate->errors(),
-                'content' => null
-            ];
+        // if ($validate->fails()) {
+        //     $response = [
+        //         'statusCode' => 422,
+        //         'messages' => $validate->errors(),
+        //         'content' => null
+        //     ];
 
-            return response()->json($response, 422);
-        }
+        //     return response()->json($response, 422);
+        // }
 
-        $data = [
-            'id_user' => Auth::user()->id,
-            'id_category' => $request->category,
-            'package_name' => $request->package_name,
-            'recepient_name' => $request->recepient_name,
-            'recepient_phone' => $request->recepient_phone,
-            'weight' => $request->weight,
-            'dimension' => $request->dimension,
-        ];
+        // $data = [
+        //     'id_user' => Auth::user()->id,
+        //     'id_category' => $request->category,
+        //     'package_name' => $request->package_name,
+        //     'recepient_name' => $request->recepient_name,
+        //     'recepient_phone' => $request->recepient_phone,
+        //     'weight' => $request->weight,
+        //     'dimension' => $request->dimension,
+        // ];
         
-        $result = Package::create($data);
+        // $result = Package::create($data);
 
-        return $result; 
+        // return $result; 
 
         // $response = [
         //     'statusCode' => 200,
