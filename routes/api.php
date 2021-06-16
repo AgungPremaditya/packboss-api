@@ -38,7 +38,7 @@ Route::group(['middleware' => 'auth:sanctum', 'namespace' => 'API'], function(){
 
         //Packages
         Route::get('/', 'PackagesController@index')->name('packages.index'); // Index
-        Route::post('/', 'PackagesController@store')->name('packages.store'); // Store
+        Route::post('/store', 'PackagesController@store')->name('packages.store'); // Store
         Route::get('/{id}', 'PackagesController@show')->name('packages.show'); // Show
         Route::put('/{id}', 'PackagesController@update')->name('packages.update'); // Update
         Route::delete('/{id}', 'PackagesController@destroy')->name('packages.delete'); // Delete
