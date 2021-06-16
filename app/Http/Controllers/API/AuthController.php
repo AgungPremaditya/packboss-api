@@ -36,6 +36,16 @@ class AuthController extends Controller
             }
 
             $user = User::where('email', $request->email)->first();
+            
+            if (empty($user)) {
+                $response = [
+                    'statusCode' => 401,
+                    'massages' => 'Email not Registered',
+                    'content' => null
+                ];
+                return response()->json($response, 401);    
+            }
+            
             if (! Hash::check($request->password, $user->password)) {
                 $response = [
                     'statusCode' => 401,
@@ -50,6 +60,7 @@ class AuthController extends Controller
                 'statusCode' => 200,
                 'massages' => 'Success',
                 'content' => [
+                    'user' => Auth::user(),
                     'accessToken' => $tokenResult,
                     'tokenType' => 'Bearer' 
                 ]
