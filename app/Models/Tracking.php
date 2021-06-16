@@ -38,4 +38,24 @@ class Tracking extends Model
     {
         return 'string';
     }
+
+    /**
+     * Get the user that owns the Tracking
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'id_user');
+    }
+
+    /**
+     * Get the transport that owns the Tracking
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function transport()
+    {
+        return $this->belongsTo(Transport::class);
+    }
 }
