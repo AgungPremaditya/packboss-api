@@ -27,7 +27,7 @@ class PickupController extends Controller
     {
         $data = [];
         $transaction = Transaction::where('receipt_number', $receipt_number)->first();
-        $transport = Transport::where('status', 1)->get();
+        $transport = Transport::get();
 
         $data =[
             'transaction' => $transaction,

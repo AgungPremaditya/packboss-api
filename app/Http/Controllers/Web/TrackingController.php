@@ -62,7 +62,7 @@ class TrackingController extends Controller
     public function create($receipt_number)
     {
         $transaction = Transaction::where('receipt_number', $receipt_number)->first();
-        $transport = Transport::where('status', 1)->get();
+        $transport = Transport::get();
         $data = [
             'transaction' => $transaction,
             'transport' => $transport

@@ -15,7 +15,6 @@ class Transport extends Model
     protected $fillable = [
         'id',
         'name',
-        'status',
         'license_number',
         'transport_type',
         'transport_code'
