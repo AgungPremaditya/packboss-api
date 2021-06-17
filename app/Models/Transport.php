@@ -15,7 +15,6 @@ class Transport extends Model
     protected $fillable = [
         'id',
         'name',
-        'status',
         'license_number',
         'transport_type',
         'transport_code'
@@ -38,5 +37,15 @@ class Transport extends Model
     public function getKeyType()
     {
         return 'string';
+    }
+
+    /**
+     * Get all of the tracking for the Transport
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function tracking(): HasMany
+    {
+        return $this->hasMany(Comment::class);
     }
 }

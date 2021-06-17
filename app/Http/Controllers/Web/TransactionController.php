@@ -16,7 +16,7 @@ class TransactionController extends Controller
      */
     public function index()
     {
-        $data = Transaction::where('status', 'waiting-for-pickup')->get();
+        $data = Transaction::all();
         
         return view('transaction.index')->with(['data' => $data]);
     }

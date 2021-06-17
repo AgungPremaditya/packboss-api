@@ -36,8 +36,7 @@ class HomeController extends Controller
 
             if (Auth::user()->role == 'operator') {
                 $pickup = Pickup::with(['transaction' => function ($query){
-                    $query->where('status', '!=','waiting-for-pickup')
-                    ->with(['package' => function ($query){
+                    $query->with(['package' => function ($query){
                         $query->select('id', 'id_origin')->with('origin');
                     }]);
                 }])
@@ -51,8 +50,7 @@ class HomeController extends Controller
                 $transactions = Transaction::all();
                 $operator = User::where('role', 'operator')->get();
                 $pickup = Pickup::with(['transaction' => function ($query){
-                    $query->where('status', '!=','waiting-for-pickup')
-                    ->with(['package' => function ($query){
+                    $query->with(['package' => function ($query){
                         $query->select('id', 'id_origin')->with('origin');
                     }]);
                 }])
@@ -70,7 +68,7 @@ class HomeController extends Controller
             }   
 
             $data['pickup'] = $pickup;
-            
+
             return view('home.index')->with(['data' => $data]);
         }else{
             return redirect()->route('unauthorized');

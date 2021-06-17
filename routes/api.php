@@ -32,6 +32,7 @@ Route::group(['middleware' => 'auth:sanctum', 'namespace' => 'API'], function(){
         
         //Origin
         Route::resource('origin', 'OriginController')->except('index', 'create', 'edit');
+        Route::get('origin/show-by-user/{id_user}', 'OriginController@showByUser');
        
        //Category Packages
         Route::resource('category', 'CategoryController')->except('create', 'edit');
@@ -53,6 +54,9 @@ Route::group(['middleware' => 'auth:sanctum', 'namespace' => 'API'], function(){
         Route::delete('/{id}', 'TransactionController@destroy')->name('transaction.delete'); // Delete
     });
     
+    Route::group(['prefix' => 'tracking'], function () {
+        Route::get('/{id_transaction}', 'TrackingController@index')->name('tracking.index');
+    });
     
     Route::get('test', function () {
         if (Gate::allows('isAdmin')) {

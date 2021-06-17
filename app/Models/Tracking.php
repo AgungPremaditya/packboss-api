@@ -7,26 +7,24 @@ use Illuminate\Database\Eloquent\Model;
 
 use Illuminate\Support\Str;
 
-class Origin extends Model
+class Tracking extends Model
 {
     use HasFactory;
-    
-    protected $table = 'origins';
+
+    protected $table = 'trackings';
     protected $fillable = [
         'id',
+        'id_transaction',
+        'id_transport',
         'id_user',
-        'country_name',
-        'province_name',
-        'region_name',
-        'postal_code',
-        'detail_address'
+        'tracking_status'
     ];
 
     public static function boot()
     {
         parent::boot();
-        self::creating(function($destination){
-            $destination->{$destination->getKeyName()} = (string) Str::uuid();
+        self::creating(function($tracking){
+            $tracking->{$tracking->getKeyName()} = (string) Str::uuid();
         });
     }
 
@@ -42,22 +40,22 @@ class Origin extends Model
     }
 
     /**
-     * Get the user that owns the Origin
+     * Get the user that owns the Tracking
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function users()
+    public function user()
     {
         return $this->belongsTo(User::class, 'id_user');
     }
 
     /**
-     * Get all of the package for the Origin
+     * Get the transport that owns the Tracking
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function package()
+    public function transport()
     {
-        return $this->hasMany(Package::class);
+        return $this->belongsTo(Transport::class, 'id_transport');
     }
 }

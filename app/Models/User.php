@@ -85,4 +85,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(Package::class);
     }
+
+    /**
+     * Get all of the tracking for the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function tracking()
+    {
+        return $this->hasMany(Tracking::class);
+    }
 }

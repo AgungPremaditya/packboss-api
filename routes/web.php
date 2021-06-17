@@ -28,4 +28,12 @@ Route::group(['namespace' => 'Web'], function () {
     Route::get('/pickup/{receipt_number}', 'PickupController@create')->name('pickup.create');
     Route::post('/pickup/store', 'PickupController@store')->name('pickup.store');
     Route::get('/on-waiting', 'PickupController@onWaiting')->name('pickup.onwaiting');
+
+    //Tracking
+    Route::get('/tracking/create/{receipt_number}', 'TrackingController@create')->name('tracking.create');
+    Route::post('/tracking/store', 'TrackingController@store')->name('tracking.store');
+    Route::get('/tracking/{receipt_number}', 'TrackingController@index')->name('tracking.index');
+
+    //Transaction
+    Route::get('/transaction', 'TransactionController@index');
 });

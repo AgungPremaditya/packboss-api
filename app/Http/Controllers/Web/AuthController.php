@@ -33,6 +33,10 @@ class AuthController extends Controller
         
         $user = User::where('email', $request->email)->first();
 
+        if (empty($user)) {
+            Session::flash('error', 'Email Salah');
+            return redirect()->back();
+        }
 
         if ($user->role == 'user') {
             return view('auth.forbidden');
@@ -45,8 +49,8 @@ class AuthController extends Controller
                 }
                 return redirect()->route('home');
             } else {
-                Session::flash('error', 'Email atau Password Salah');
-                return redirect()->route('/');
+                Session::flash('error', 'Password Salah');
+                return redirect()->back();
             }
         }
     }
