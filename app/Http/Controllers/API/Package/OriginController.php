@@ -98,6 +98,34 @@ class OriginController extends Controller
     }
 
     /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function showByUser($id_user)
+    {
+        $data = Origin::where('id_user', $id_user)->with('users')->first();
+
+        if (empty($data)) {
+            $response = [
+                'statusCode' => 404,
+                'messages' => 'not found',
+                'content' => null
+            ];
+
+            return response()->json($response, 404);    
+        }
+
+        $response = [
+            'statusCode' => 200,
+            'messages' => 'success',
+            'content' => $data
+        ];
+        return response()->json($response, 200);
+    }
+
+    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request

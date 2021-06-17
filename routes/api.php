@@ -32,6 +32,7 @@ Route::group(['middleware' => 'auth:sanctum', 'namespace' => 'API'], function(){
         
         //Origin
         Route::resource('origin', 'OriginController')->except('index', 'create', 'edit');
+        Route::get('origin/show-by-user/{id_user}', 'OriginController@showByUser');
        
        //Category Packages
         Route::resource('category', 'CategoryController')->except('create', 'edit');
