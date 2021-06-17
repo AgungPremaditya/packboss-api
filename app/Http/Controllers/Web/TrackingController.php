@@ -10,7 +10,8 @@ use App\Models\Tracking;
 use App\Models\Transaction;
 use App\Models\Transport;
 
-use Validator;
+use Carbon\Carbon;
+use Validator, DateTime;
 
 class TrackingController extends Controller
 {
@@ -19,9 +20,38 @@ class TrackingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($receipt_number)
     {
-        //
+        $transaction = Transaction::where('receipt_number', $receipt_number)
+        ->with([
+            'package' => function($query){
+                $query->with(['category', 'destination'])
+                ->with(['origin' => function($query){
+                    $query->with('users');
+                }]);
+        }])
+        ->first();
+
+        $tracking = Tracking::where('id_transaction', $transaction->id)
+        ->with('transport')
+        ->get();
+
+        $tracking = array_map(function($element){
+            $date = new DateTime($element['created_at']);
+            $date = $date->format('Y-m-d H:i:s');
+            $date = Carbon::createFromFormat('Y-m-d H:i:s', $date, 'Asia/Singapore')->add(8, 'hours');
+            $element['created_at'] = $date->format('Y-m-d H:i:s');
+            return $element;
+        }, $tracking->toArray());
+        
+        $tracking = json_decode(json_encode($tracking), FALSE);
+
+        $data = [
+            'transaction' => $transaction,
+            'tracking' => $tracking
+        ];
+        
+        return view('tracking.index')->with(['data' => $data]);
     }
 
     /**

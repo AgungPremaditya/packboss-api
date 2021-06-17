@@ -56,7 +56,7 @@ class Origin extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function package(): HasMany
+    public function package()
     {
         return $this->hasMany(Package::class);
     }

@@ -32,4 +32,8 @@ Route::group(['namespace' => 'Web'], function () {
     //Tracking
     Route::get('/tracking/create/{receipt_number}', 'TrackingController@create')->name('tracking.create');
     Route::post('/tracking/store', 'TrackingController@store')->name('tracking.store');
+    Route::get('/tracking/{receipt_number}', 'TrackingController@index')->name('tracking.index');
+
+    //Transaction
+    Route::get('/transaction', 'TransactionController@index');
 });

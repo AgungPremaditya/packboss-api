@@ -56,6 +56,6 @@ class Tracking extends Model
      */
     public function transport()
     {
-        return $this->belongsTo(Transport::class);
+        return $this->belongsTo(Transport::class, 'id_transport');
     }
 }
