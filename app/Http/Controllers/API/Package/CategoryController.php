@@ -88,15 +88,6 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        if (Gate::allows('isUser')) {
-            $response = [
-                'statusCode' => 403,
-                'messages' => 'Sorry, this page is not accessible for you',
-                'content' => null
-            ];
-            return response()->json($response, 403);
-        }
-
         $data = Category::find($id);
 
         if (empty($data)) {
