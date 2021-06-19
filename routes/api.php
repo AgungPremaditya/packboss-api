@@ -52,6 +52,7 @@ Route::group(['middleware' => 'auth:sanctum', 'namespace' => 'API'], function(){
         Route::post('/', 'TransactionController@store')->name('transaction.store'); // Store
         Route::get('/{id}', 'TransactionController@show')->name('transaction.show'); // Show
         Route::delete('/{id}', 'TransactionController@destroy')->name('transaction.delete'); // Delete
+        Route::get('/user/{id_user}', 'TransactionController@showTransactionByUser')->name('transaction.showByUser');
     });
     
     Route::group(['prefix' => 'tracking'], function () {

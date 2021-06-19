@@ -202,4 +202,25 @@ class TransactionController extends Controller
 
         return $code;
     }
+
+    public function showTransactionByUser($id_user)
+    {
+        $result = Transaction::with(['package' => function($query) use($id_user) {
+            $query->where('id_user', $id_user);
+        }])->get();
+        
+        foreach ($result as $value) {
+            if ($value->package != null) {
+                $data[] = $value;
+            }
+        }
+
+        $response = [
+            'statusCode' => 200,
+            'messages' => 'Success',
+            'content' => $data
+        ];
+        
+        return $response;
+    }
 }
