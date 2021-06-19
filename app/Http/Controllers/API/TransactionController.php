@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 
 use App\Models\Transaction;
 use App\Models\Destination;
+use App\Models\Tracking;
 use App\Models\Package;
 use App\Models\Origin;
 
@@ -82,6 +83,13 @@ class TransactionController extends Controller
         ];
         
         $result = Transaction::create($data);
+
+        Tracking::create([
+            'id_transaction' => $result->id,
+            'id_transport' => null,
+            'id_user' => null,
+            'tracking_status' => 'waiting-for-pickup'
+        ]);
         
         $response = [
             'statusCode' => 200,

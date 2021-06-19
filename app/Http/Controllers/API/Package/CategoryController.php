@@ -20,8 +20,14 @@ class CategoryController extends Controller
     public function index()
     {
         $data = Category::all();
+        
+        $response = [
+            'statusCode' => 200,
+            'messages' => 'Success',
+            'content' => $data
+        ];
 
-        return response()->json($data, 200);
+        return response()->json($response, 200);
     }
 
     /**
