@@ -1,39 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>PackBoss - Home</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-</head>
-<body>
-  {{-- NAV --}}
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <span class="navbar-brand">PackBoss</span>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link" href="/home">Home <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item active">
-          <a class="nav-link" href="#">Transaction</a>
-        </li>
-        @if (Auth::user()->role == 'admin')
-        <li class="nav-item">
-          <a class="nav-link" href="/operator">Operator</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/transaction">Transaction</a>
-        </li>
-        @endif
-      </ul>
-    </div>
-  </nav>
-  {{-- END-NAV --}}
-  
-  <br>
-
+@extends('layouts.body')
+@section('content')
   {{-- HOME --}}
   <div class="container">
     <br>
@@ -76,5 +42,4 @@
   </div>
   {{-- END-HOME --}}
 
-</body>
-</html>
+@endsection
