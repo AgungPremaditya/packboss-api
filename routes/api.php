@@ -20,6 +20,7 @@ Route::group(['prefix' => 'auth', 'namespace' => 'API'], function() {
     Route::post('login', 'AuthController@Login')->name('auth.login');
     Route::post('register', 'AuthController@Register')->name('auth.register');
     Route::get('unauthorized', 'AuthController@Unauthorized')->name('auth.unauthorized');
+    Route::post('logout', 'AuthController@Logout')->name('auth.logout')->middleware('auth:sanctum');
 });
 
 Route::group(['middleware' => 'auth:sanctum', 'namespace' => 'API'], function(){

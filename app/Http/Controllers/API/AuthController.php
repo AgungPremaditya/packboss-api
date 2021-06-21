@@ -115,6 +115,19 @@ class AuthController extends Controller
         return response()->json($response, 200);
     }
 
+    public function Logout()
+    {
+        $user = Auth::user();
+        $user->currentAccessToken()->delete();
+        $respon = [
+            'status' => 200,
+            'massages' => 'success',
+            'content' => null,
+        ];
+        return response()->json($respon, 200);
+        
+    }
+
     public function Unauthorized()
     {
         $response = [
