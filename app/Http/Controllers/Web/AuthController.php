@@ -38,6 +38,11 @@ class AuthController extends Controller
             return redirect()->back();
         }
 
+        if ($user->status == 'inactive') {
+            Session::flash('error', 'Akun anda tidak aktif');
+            return redirect()->back();
+        }
+
         if ($user->role == 'user') {
             return view('auth.forbidden');
         } else {

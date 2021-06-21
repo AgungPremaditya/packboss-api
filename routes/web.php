@@ -44,5 +44,13 @@ Route::group(['namespace' => 'Web'], function () {
         Route::get('/transport/edit/{id}', 'TransportController@edit')->name('transport.edit');
         Route::put('/transport/update/{id}', 'TransportController@update')->name('transport.update');
         Route::delete('/transport/delete/{id}', 'TransportController@destroy')->name('transport.delete');
+
+        //Transport
+        Route::get('/operator', 'OperatorController@index')->name('operator.index');
+        Route::get('/operator/create', 'OperatorController@create')->name('operator.create');
+        Route::post('/operator/store', 'OperatorController@store')->name('operator.store');
+        Route::get('/operator/edit/{id}', 'OperatorController@edit')->name('operator.edit');
+        Route::put('/operator/update/{id}', 'OperatorController@update')->name('operator.update');
+        Route::put('/operator/delete/{id}', 'OperatorController@destroy')->name('operator.delete');
     });
 });
