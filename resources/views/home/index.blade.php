@@ -9,7 +9,7 @@
 
         @if (Auth::user()->role == 'operator')
         <div class="row">
-          <div class="col-sm-6">
+          <div class="col-sm-4">
             <div class="card text-center">
               <div class="card-header bg-primary text-white" style="font-weight: 600; font-size: 18px;">
                 Package on Waiting
@@ -21,7 +21,7 @@
             </div>
           </div>
     
-          <div class="col-sm-6">
+          <div class="col-sm-4">
             <div class="card text-center">
               <div class="card-header bg-warning" style="font-weight: 600; font-size: 18px;">
                 Transports
@@ -29,6 +29,18 @@
               <div class="card-body bg-light">
                 <h5 class="card-title" style="font-weight: 600; font-size: 42px; margin: 20px;">{{$data['transport']}}</h5>
                 <a href="#" class="btn bg-warning text-dark">Check Transport</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-4">
+            <div class="card text-center">
+              <div class="card-header bg-info text-white" style="font-weight: 600; font-size: 18px;">
+                Transaction
+              </div>
+              <div class="card-body bg-light">
+                <h5 class="card-title" style="font-weight: 600; font-size: 42px; margin: 20px;">{{$data['transaction']}}</h5>
+                <a href="#" class="btn bg-info text-white">Check Transaction</a>
               </div>
             </div>
           </div>

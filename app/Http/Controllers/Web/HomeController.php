@@ -34,6 +34,9 @@ class HomeController extends Controller
         ];
 
         if (Auth::user()->role == 'operator') {
+
+            //Get Data
+            $transactions = Transaction::all();
             $pickup = Pickup::with(['transaction' => function ($query){
                 $query->with(['package' => function ($query){
                     $query->select('id', 'id_origin')->with('origin');
@@ -41,6 +44,9 @@ class HomeController extends Controller
             }])
             ->get();
 
+            //Count Transaction
+            $countedTransactions = count($transactions->toArray());
+            $data['transaction'] = $countedTransactions;
         }
 
         if (Auth::user()->role == 'admin') {
