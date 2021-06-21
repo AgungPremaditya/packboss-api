@@ -26,7 +26,7 @@
               </div>
               <div class="card-body bg-light">
                 <h5 class="card-title" style="font-weight: 600; font-size: 42px; margin: 20px;">{{$data['transport']}}</h5>
-                <a href="#" class="btn bg-warning text-dark">Check Transport</a>
+                <a href="/transport" class="btn bg-warning text-dark">Check Transport</a>
               </div>
             </div>
           </div>
@@ -38,7 +38,7 @@
               </div>
               <div class="card-body bg-light">
                 <h5 class="card-title" style="font-weight: 600; font-size: 42px; margin: 20px;">{{$data['transaction']}}</h5>
-                <a href="#" class="btn bg-info text-white">Check Transaction</a>
+                <a href="/transaction" class="btn bg-info text-white">Check Transaction</a>
               </div>
             </div>
           </div>
@@ -52,7 +52,7 @@
               </div>
               <div class="card-body bg-light">
                 <h5 class="card-title" style="font-weight: 600; font-size: 42px; margin: 20px;">{{$data['operator']}}</h5>
-                <a href="#" class="btn bg-secondary text-white">Check Operator</a>
+                <a href="/operator" class="btn bg-secondary text-white">Check Operator</a>
               </div>
             </div>
           </div>

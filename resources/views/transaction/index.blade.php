@@ -5,7 +5,7 @@
     <br>
     <div class="row">
       <div class="col-sm-12" style="padding: 18px;">
-        <h2 style="padding-bottom: 10px;">Transaction</h2>
+        <h2 style="padding-bottom: 10px;">Package on Waiting</h2>
 
         <div class="table-responsive">
           <table class="table table-striped">
