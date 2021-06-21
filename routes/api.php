@@ -57,7 +57,7 @@ Route::group(['middleware' => 'auth:sanctum', 'namespace' => 'API'], function(){
     });
     
     Route::group(['prefix' => 'tracking'], function () {
-        Route::get('/{id_transaction}', 'TrackingController@index')->name('tracking.index');
+        Route::get('/{receipt_number}', 'TrackingController@index')->name('tracking.index');
     });
     
     Route::get('test', function () {

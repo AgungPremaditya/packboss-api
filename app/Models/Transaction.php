@@ -61,4 +61,14 @@ class Transaction extends Model
         return $this->hasOne(Pickup::class);
     }
 
+    /**
+     * Get all of the tracking for the Transaction
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function tracking()
+    {
+        return $this->hasMany(Tracking::class);
+    }
+
 }

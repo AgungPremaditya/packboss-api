@@ -15,17 +15,25 @@ class TrackingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($id_transaction)
+    public function index($receipt_number)
     {
-        $data = Tracking::where('id_transaction', $id_transaction)
-        ->with(['user' => function($query){
+        $result = Tracking::with(['user' => function($query){
             $query->select(['id', 'name', 'email']);
         }])
         ->with(['transport' => function($query){
             $query->select(['id', 'name', 'transport_code', 'license_number']);
         }])
+        ->with(['transaction' => function($query) use($receipt_number){
+            $query->where('receipt_number', $receipt_number);
+        }])
         ->get();
         
+        foreach ($result as $value) {
+            if ($value->transaction != null) {
+                $data[] = $value;
+            }
+        }
+
         $response = [
             'statusCode' => 200,
             'messages' => 'success',

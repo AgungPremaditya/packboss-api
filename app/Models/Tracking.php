@@ -58,4 +58,14 @@ class Tracking extends Model
     {
         return $this->belongsTo(Transport::class, 'id_transport');
     }
+
+    /**
+     * Get the transaction that owns the Tracking
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function transaction()
+    {
+        return $this->belongsTo(Transaction::class, 'id_transaction');
+    }
 }
