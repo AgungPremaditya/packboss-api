@@ -41,5 +41,8 @@ Route::group(['namespace' => 'Web'], function () {
         Route::get('/transport', 'TransportController@index')->name('transport.index');
         Route::get('/transport/create', 'TransportController@create')->name('transport.create');
         Route::post('/transport/store', 'TransportController@store')->name('transport.store');
+        Route::get('/transport/edit/{id}', 'TransportController@edit')->name('transport.edit');
+        Route::put('/transport/update/{id}', 'TransportController@update')->name('transport.update');
+        Route::delete('/transport/delete/{id}', 'TransportController@destroy')->name('transport.delete');
     });
 });
