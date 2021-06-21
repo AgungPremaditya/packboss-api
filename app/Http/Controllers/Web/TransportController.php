@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Models\Transport;
+use App\Models\Tracking;
 
 use Validator;
 class TransportController extends Controller
@@ -83,7 +84,9 @@ class TransportController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data = Transport::find($id);
+
+        return view('transport.edit')->with(['data' => $data]);
     }
 
     /**
@@ -95,7 +98,30 @@ class TransportController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validate = Validator::make($request->all(), [
+            'name' => 'required',
+            'type' => 'required',
+            'license_number' => 'required',
+            'transport_code' => 'required'
+        ]);
+
+        if ($validate->fails()) {
+            $error = $validate->errors();
+            return redirect()->back()->withErrors($error)->withInput();
+        }
+
+        $data = [
+            'name' => $request->name,
+            'transport_type' => $request->type, 
+            'license_number' => $request->license_number,
+            'transport_code' => $request->transport_code
+        ];
+        
+        $result = Transport::find($id);
+
+        $result->update($data);
+        
+        return redirect()->route('transport.index');
     }
 
     /**
@@ -106,6 +132,17 @@ class TransportController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $data = Transport::find($id);
+
+        $transaction  = Tracking::where('id_transport', $id)->first();
+        
+        if (empty($transaction)) {
+            $data->delete();
+            return redirect()->back();
+        }
+
+        
+        return redirect()->back()->withErrors(['cant_delete' => 'Cant Delete this record']);
+
     }
 }

@@ -15,6 +15,12 @@
           </div>
           @endif
         </div>
+      
+        @if($errors->any())
+          <div class="alert alert-danger" role="alert">
+            {{ implode('', $errors->all(':message')) }}
+          </div>
+        @endif
 
         <div class="table-responsive">
           <table class="table table-striped">
@@ -46,7 +52,20 @@
                   </td>
                   @if (auth()->user()->role == 'admin')
                   <td>
-                    <a href="/tracking/{{$item->receipt_number}}" class="btn btn-primary">Detail</a>
+                    <div class="row" style="width: 100%">
+                      <div class="col-sm-3">
+                        <a href="/transport/edit/{{$item->id}}" class="btn btn-primary"><i class="fas fa-edit"></i></a>
+                      </div>
+                      <div class="col-sm-3">
+                        <form action="/transport/delete/{{$item->id}}" method="post">
+                          @csrf
+                          @method('DELETE')
+                          <button type="submit" class="btn btn-danger">
+                            <i class="far fa-trash-alt"></i>
+                          </button>
+                        </form>
+                      </div>
+                    </div>
                   </td>
                   @endif
                 </tr>

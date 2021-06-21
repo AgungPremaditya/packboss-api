@@ -23,4 +23,6 @@
 
   <!-- Latest compiled and minified JavaScript DatePicker-->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>  
+
+  <script src="https://kit.fontawesome.com/60a14dfd0b.js" crossorigin="anonymous"></script>
 </head>
