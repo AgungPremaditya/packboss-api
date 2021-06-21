@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,6 +20,10 @@ Route::group(['namespace' => 'Web'], function () {
     Route::post('/', 'AuthController@login');
     Route::get('/unauthorized', 'AuthController@unauthorized')->name('unauthorized');
     Route::get('/forbidden', 'AuthController@forbidden')->name('forbidden');
+    Route::get('/logout', function () {
+        Auth::logout();
+        return redirect()->route('login');
+    });
     
     Route::group(['middleware' => 'auth.web'], function () {
         //Home
