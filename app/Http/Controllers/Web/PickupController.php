@@ -20,7 +20,7 @@ class PickupController extends Controller
     {
         $data = Transaction::where('status', 'waiting-for-pickup')->get();
         
-        return view('transaction.index')->with(['data' => $data]);
+        return view('pickup.index')->with(['data' => $data]);
     }
 
     public function create($receipt_number)

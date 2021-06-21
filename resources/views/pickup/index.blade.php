@@ -5,7 +5,7 @@
     <br>
     <div class="row">
       <div class="col-sm-12" style="padding: 18px;">
-        <h2 style="padding-bottom: 10px;">Transaction</h2>
+        <h2 style="padding-bottom: 10px;">Package on Waiting</h2>
 
         <div class="table-responsive">
           <table class="table table-striped">
@@ -30,7 +30,7 @@
                     <td>{{$item->package->origin->detail_address}}</td>
                     <td style="font-weight: 600;">{{$item->status}}</td>
                     <td>
-                      <a href="/tracking/{{$item->receipt_number}}" class="btn btn-primary">Detail</a>
+                      <a href="/pickup/{{$item->receipt_number}}" class="btn btn-primary">Detail</a>
                     </td>
                   </tr>
               @endforeach
