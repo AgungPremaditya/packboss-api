@@ -9,9 +9,11 @@
           <div class="col-sm-10">
             <h2 style="padding-bottom: 10px;">Transport</h2>
           </div>
+          @if (auth()->user()->role == 'admin')
           <div class="col-sm-2">
             <a href="/transport/create/" class="btn btn-primary">Add Transport</a>
           </div>
+          @endif
         </div>
 
         <div class="table-responsive">
@@ -19,9 +21,12 @@
             <thead>
               <tr>
                 <th scope="col">Transport Code</th>
-                <th scope="col">Pick-Up Location</th>
-                <th scope="col">Status</th>
+                <th scope="col">Name</th>
+                <th scope="col">License Code</th>
+                <th scope="col">Type</th>
+                @if (auth()->user()->role == 'admin')
                 <th scope="col">Action</th>
+                @endif
               </tr>
             </thead>
             <tbody>

@@ -39,5 +39,7 @@ Route::group(['namespace' => 'Web'], function () {
 
         //Transport
         Route::get('/transport', 'TransportController@index')->name('transport.index');
+        Route::get('/transport/create', 'TransportController@create')->name('transport.create');
+        Route::post('/transport/store', 'TransportController@store')->name('transport.store');
     });
 });

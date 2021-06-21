@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 use App\Models\Transport;
 
+use Validator;
 class TransportController extends Controller
 {
     /**
@@ -28,7 +29,7 @@ class TransportController extends Controller
      */
     public function create()
     {
-        //
+        return view('transport.create');
     }
 
     /**
@@ -39,7 +40,28 @@ class TransportController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validate = Validator::make($request->all(), [
+            'name' => 'required',
+            'type' => 'required',
+            'license_number' => 'required',
+            'transport_code' => 'required'
+        ]);
+
+        if ($validate->fails()) {
+            $error = $validate->errors();
+            return redirect()->back()->withErrors($error)->withInput();
+        }
+
+        $data = [
+            'name' => $request->name,
+            'transport_type' => $request->type, 
+            'license_number' => $request->license_number,
+            'transport_code' => $request->transport_code
+        ];
+
+        Transport::create($data);
+
+        return redirect()->route('transport.index');
     }
 
     /**
