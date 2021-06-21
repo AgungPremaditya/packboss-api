@@ -6,10 +6,8 @@
     <div class="row">
       <div class="col-sm-12" style="padding: 18px;">
         <h2 style="padding-bottom: 10px;">Dashboard</h2>
-
-        @if (Auth::user()->role == 'operator')
         <div class="row">
-          <div class="col-sm-4">
+          <div class="col-sm-{{(Auth::user()->role == 'admin') ? '3' : '4'}}">
             <div class="card text-center">
               <div class="card-header bg-primary text-white" style="font-weight: 600; font-size: 18px;">
                 Package on Waiting
@@ -21,7 +19,7 @@
             </div>
           </div>
     
-          <div class="col-sm-4">
+          <div class="col-sm-{{(Auth::user()->role == 'admin') ? '3' : '4'}}">
             <div class="card text-center">
               <div class="card-header bg-warning" style="font-weight: 600; font-size: 18px;">
                 Transports
@@ -33,7 +31,7 @@
             </div>
           </div>
 
-          <div class="col-sm-4">
+          <div class="col-sm-{{(Auth::user()->role == 'admin') ? '3' : '4'}}">
             <div class="card text-center">
               <div class="card-header bg-info text-white" style="font-weight: 600; font-size: 18px;">
                 Transaction
@@ -44,35 +42,9 @@
               </div>
             </div>
           </div>
-        </div>
-        @endif
+          
 
-        @if (Auth::user()->role == 'admin')
-        <div class="row">
-          <div class="col-sm-3">
-            <div class="card text-center">
-              <div class="card-header bg-primary text-white" style="font-weight: 600; font-size: 18px;">
-                Package on Waiting
-              </div>
-              <div class="card-body bg-light">
-                <h5 class="card-title" style="font-weight: 600; font-size: 42px; margin: 20px;">{{$data['waiting-list']}}</h5>
-                <a href="/on-waiting" class="btn btn-primary">Check Package</a>
-              </div>
-            </div>
-          </div>
-    
-          <div class="col-sm-3">
-            <div class="card text-center">
-              <div class="card-header bg-warning" style="font-weight: 600; font-size: 18px;">
-                Transports
-              </div>
-              <div class="card-body bg-light">
-                <h5 class="card-title" style="font-weight: 600; font-size: 42px; margin: 20px;">{{$data['transport']}}</h5>
-                <a href="#" class="btn bg-warning text-dark">Check Transport</a>
-              </div>
-            </div>
-          </div>
-
+          @if (Auth::user()->role == 'admin')
           <div class="col-sm-3">
             <div class="card text-center">
               <div class="card-header bg-secondary text-white" style="font-weight: 600; font-size: 18px;">
@@ -84,20 +56,8 @@
               </div>
             </div>
           </div>
-
-          <div class="col-sm-3">
-            <div class="card text-center">
-              <div class="card-header bg-info text-white" style="font-weight: 600; font-size: 18px;">
-                Transaction
-              </div>
-              <div class="card-body bg-light">
-                <h5 class="card-title" style="font-weight: 600; font-size: 42px; margin: 20px;">{{$data['transaction']}}</h5>
-                <a href="#" class="btn bg-info text-white">Check Transaction</a>
-              </div>
-            </div>
-          </div>
+          @endif
         </div>
-        @endif
 
       </div>
     </div>

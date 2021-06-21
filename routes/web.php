@@ -36,5 +36,8 @@ Route::group(['namespace' => 'Web'], function () {
     
         //Transaction
         Route::get('/transaction', 'TransactionController@index')->name('transaction.index');
+
+        //Transport
+        Route::get('/transport', 'TransportController@index')->name('transport.index');
     });
 });

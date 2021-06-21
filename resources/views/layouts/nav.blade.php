@@ -9,12 +9,12 @@
       <li class="nav-item {{request()->routeIs('transaction.index') ? 'active' : ''}}">
         <a class="nav-link" href="/transaction">Transaction</a>
       </li>
+      <li class="nav-item {{request()->routeIs('transport.index') ? 'active' : ''}}">
+        <a class="nav-link" href="/transport">Transport</a>
+      </li>
       @if (Auth::user()->role == 'admin')
       <li class="nav-item {{request()->routeIs('operator.index') ? 'active' : ''}}">
         <a class="nav-link" href="/operator">Operator</a>
-      </li>
-      <li class="nav-item {{request()->routeIs('transport.index') ? 'active' : ''}}">
-        <a class="nav-link" href="/transport">Transport</a>
       </li>
       @endif
     </ul>
