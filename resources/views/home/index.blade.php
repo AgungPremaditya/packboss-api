@@ -75,7 +75,6 @@
                 <th scope="col">Package Receipt</th>
                 <th scope="col">Pick-Up Location</th>
                 <th scope="col">Pick-Up Time</th>
-                <th scope="col">Status</th>
               </tr>
             </thead>
             <tbody>
@@ -89,7 +88,6 @@
                     <td style="font-weight: 600;">{{$item->transaction->receipt_number}}</td>
                     <td>{{$item->transaction->package->origin->detail_address}}</td>
                     <td>{{$item->pickedup_at}}</td>
-                    <td style="font-weight: 600;">{{$item->transaction->status}}</td>
                   </tr>
               @endforeach
             </tbody>
