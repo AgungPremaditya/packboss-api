@@ -53,7 +53,7 @@ class HomeController extends Controller
           
             //Get Data
             $transactions = Transaction::all();
-            $operator = User::where('role', 'operator')->get();
+            $operator = User::where('role', 'operator')->where('status', 'active')->get();
             $pickup = Pickup::with(['transaction' => function ($query){
                 $query->with(['package' => function ($query){
                     $query->select('id', 'id_origin')->with('origin');
