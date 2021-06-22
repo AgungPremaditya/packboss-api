@@ -30,6 +30,7 @@
                       <option value="on-office-storage">on-office-storage</option>
                       <option value="on-sorting">on-sorting</option>
                       <option value="on-delivery-courier">on-delivery-courier</option>
+                      <option value="delivered">delivered</option>
                       <option value="canceled">canceled</option>
                     </select>
                   </div>

@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Models\Transport;
 use App\Models\Transaction;
 use App\Models\Pickup;
+use App\Models\Tracking;
 
 use Carbon\Carbon;
 
@@ -69,9 +70,14 @@ class PickupController extends Controller
         ];
 
         $result = Pickup::create($data);
+        Tracking::create([
+            'id_transaction' => $transaction->id,
+            'id_user' => Auth::user()->id,
+            'id_transport' => $request->id_transport,
+            'tracking_status' => 'on-pickup'
+        ]);
 
         $transaction->update(['status' => 'on-pickup']);
-        $transport->update(['status' => 0]);
 
         return redirect()->route('home');
     }
