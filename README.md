@@ -22,12 +22,15 @@ $ cp env-example .env
 ```sh
 $ composer install
 ```
-6. Run this command:
+6. Run this command to generate key:
 ```sh
 $ php artisan key:generate
-$ composer dump-autoload
 ```
 7. Run this command to migrate data to database:
 ```sh
-$ php artisan migrate:fresh && php artisan passport:install
+$ php artisan migrate:fresh
+```
+8. Run this command to serve apps:
+```sh
+$ php artisan serve
 ```
